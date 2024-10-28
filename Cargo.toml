@@ -1,0 +1,11 @@
+[package]
+name = "rust-react"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+template_expression = { path = "./crates/template_expression" }
+
+[workspace]
+members = ["crates/template_expression"]
