@@ -5,7 +5,7 @@ edition = "2021"
 
 
 [dependencies]
-derive_more = { version = "1.0.0", features = ["from"] }
+derive_more = { version = "1.0.0", features = ["debug", "from"] }
 rust-react-template = { path = "./template" }
 
 [workspace]

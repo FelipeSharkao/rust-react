@@ -1,6 +1,9 @@
 use std::any::Any;
+use std::ops::Deref;
 
-use derive_more::derive::From;
+use derive_more::derive::{Debug, From};
+
+use crate::Component;
 
 #[derive(From, Debug)]
 pub enum ReactNode {
@@ -18,6 +21,6 @@ pub struct ReactElement {
 
 #[derive(From, Debug)]
 pub enum ReactElementType {
-    TagName(String),
-    Component(()),
+    TagName(&'static str),
+    Component(#[debug("{:?}", Component::type_id(_0.deref()))] Box<dyn Component>),
 }

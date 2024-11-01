@@ -58,17 +58,21 @@ impl ToTokens for ElementNode {
                 quote! { ::rust_react::ReactNode::List(#children_nodes) }
             }
             ElementType::TagName(..) | ElementType::Component(..) => {
-                let variant = match &self.ty {
-                    ElementType::TagName(name) => {
+                let (variant, props) = match &self.ty {
+                    ElementType::TagName(name) => (
                         quote! {
-                            ::rust_react::ReactElementType::TagName(#name.to_string())
-                        }
-                    }
-                    ElementType::Component(path) => {
+                            ::rust_react::ReactElementType::TagName(#name)
+                        },
+                        quote! { () },
+                    ),
+                    ElementType::Component(path) => (
                         quote! {
-                            ::rust_react::ReactElementType::Component(#path)
-                        }
-                    }
+                            ::rust_react::ReactElementType::Component(Box::new(#path))
+                        },
+                        quote! {
+                            #path::Props {}
+                        },
+                    ),
                     ElementType::Fragment => unreachable!(),
                 };
                 quote! {
@@ -77,7 +81,7 @@ impl ToTokens for ElementNode {
                         ::rust_react::ReactNode::Element(
                             ::rust_react::ReactElement {
                                 ty,
-                                props: Box::new(()),
+                                props: Box::new(#props),
                                 children: #children_nodes,
                             }
                         )
