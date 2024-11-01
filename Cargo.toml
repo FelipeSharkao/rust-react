@@ -5,7 +5,8 @@ edition = "2021"
 
 
 [dependencies]
-template_expression = { path = "./crates/template_expression" }
+derive_more = { version = "1.0.0", features = ["from"] }
+rust-react-template = { path = "./template" }
 
 [workspace]
-members = ["crates/template_expression"]
+members = ["template"]

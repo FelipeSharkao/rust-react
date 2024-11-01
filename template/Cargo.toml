@@ -1,0 +1,19 @@
+[package]
+name = "rust-react-template"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+derive_more = { version = "1.0.0", features = [
+    "std",
+    "debug",
+    "display",
+    "from",
+] }
+proc-macro-error = "1.0.4"
+proc-macro2 = "1.0.89"
+quote = "1.0.37"
+syn = "2.0.85"
